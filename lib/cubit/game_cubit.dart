@@ -9,6 +9,7 @@ class GameCubit extends Cubit<GameState> {
 
   Color gameChooseColor = Colors.grey;
   int countScore = 0;
+  int yourScore = 0;
 
   Color randomizeColor() {
     List<Color> colors = [
@@ -35,6 +36,11 @@ class GameCubit extends Cubit<GameState> {
   void addScore() {
     countScore += 1;
     print(countScore);
+    emit(GameChangePosition());
+  }
+
+  void resetScore() {
+    countScore = 0;
     emit(GameChangePosition());
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:picknumbergame/cubit/game_cubit.dart';
@@ -46,6 +47,8 @@ class PlayingScreen extends StatelessWidget {
                   onTap: () {
                     if (gameChoosenColor[1] == Colors.orange) {
                       context.read<GameCubit>().addScore();
+                    } else {
+                      giveDialog(context: context);
                     }
                   },
                 ),
@@ -55,6 +58,8 @@ class PlayingScreen extends StatelessWidget {
                   onTap: () {
                     if (gameChoosenColor[1] == Colors.red) {
                       context.read<GameCubit>().addScore();
+                    } else {
+                      giveDialog(context: context);
                     }
                   },
                 ),
@@ -64,6 +69,8 @@ class PlayingScreen extends StatelessWidget {
                   onTap: () {
                     if (gameChoosenColor[1] == Colors.brown) {
                       context.read<GameCubit>().addScore();
+                    } else {
+                      giveDialog(context: context);
                     }
                   },
                 ),
@@ -73,6 +80,8 @@ class PlayingScreen extends StatelessWidget {
                   onTap: () {
                     if (gameChoosenColor[1] == Colors.pink) {
                       context.read<GameCubit>().addScore();
+                    } else {
+                      giveDialog(context: context);
                     }
                   },
                 ),
@@ -82,6 +91,8 @@ class PlayingScreen extends StatelessWidget {
                   onTap: () {
                     if (gameChoosenColor[1] == Colors.grey) {
                       context.read<GameCubit>().addScore();
+                    } else {
+                      giveDialog(context: context);
                     }
                   },
                 ),
@@ -118,6 +129,25 @@ class PlayingScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<T?> giveDialog<T>({required BuildContext context}) {
+    return showDialog(
+      context: context,
+      builder: (_) {
+        return CupertinoAlertDialog(
+          title: Text("Your score: " + context.read<GameCubit>().countScore.toString()),
+          actions: [
+            CupertinoButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  context.read<GameCubit>().resetScore();
+                  Navigator.pop(context);
+                })
+          ],
+        );
+      },
     );
   }
 
